@@ -41,7 +41,8 @@ import (
 	"os"
 	"time"
 
-	"github.com/Wayt/draw2d"
+        "github.com/julianshen/draw2d/draw2dimg"
+        "github.com/julianshen/draw2d/draw2dkit"
 	"github.com/lazywei/go-opencv/opencv"
 	"github.com/nfnt/resize"
 )
@@ -420,7 +421,7 @@ func faceDetect(i *image.Image, o *image.Image) {
 	cascade := opencv.LoadHaarClassifierCascade(faceDetectionHaarCascade)
 	faces := cascade.DetectObjects(cvImage)
 
-	gc := draw2d.NewGraphicContext((*o).(*image.RGBA))
+	gc := draw2dimg.NewGraphicContext((*o).(*image.RGBA))
 
 	if debug == true {
 		fmt.Println("Faces detected:", len(faces))
@@ -430,7 +431,7 @@ func faceDetect(i *image.Image, o *image.Image) {
 		if debug == true {
 			fmt.Printf("Face: x: %d y: %d w: %d h: %d\n", face.X(), face.Y(), face.Width(), face.Height())
 		}
-		draw2d.Ellipse(
+		draw2dkit.Ellipse(
 			gc,
 			float64(face.X()+(face.Width()/2)),
 			float64(face.Y()+(face.Height()/2)),
